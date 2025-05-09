@@ -4,15 +4,14 @@
             <div class="flex flex-col gap-2 md:flex-row">
                 <x-input icon="o-magnifying-glass" placeholder="Search personnel..." inline wire:model.live="search"
                     clearable />
-                <x-button label="Add Personnel" icon="o-plus" @click="$wire.add"
-                    class="btn-primary w-full md:w-auto" />
+                <x-button label="Add Personnel" icon="o-plus" @click="$wire.add" class="btn-primary w-full md:w-auto" />
             </div>
 
         </x-slot:menu>
 
         <x-table :headers="$headers" :rows="$personnels" :sort-by="$sortBy" with-pagination show-empty-text>
             @scope('cell_id', $user)
-            {{$loop->index + 1}}
+            {{$loop->iteration}}
             @endscope
             @scope('actions', $user)
             <div class="flex gap-1">

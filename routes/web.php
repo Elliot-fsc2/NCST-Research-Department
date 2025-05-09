@@ -1,4 +1,6 @@
 `<?php
+use App\Livewire\CourseManagement;
+use App\Livewire\DepartmentCourseManagement;
 use App\Livewire\Groups;
 use App\Livewire\HeadAnnouncement;
 use App\Livewire\HeadDashboard;
@@ -32,10 +34,12 @@ Route::get('/', function () {
 
 Route::get('/test', function () {
     return 'sadasd';
-});// Users will be redirected to this route if not logged in
+});
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/welcome', Welcome::class)->name('welcome');
+    Route::get('/welcome', function(){
+        return view('welcome');
+    })->name('welcome');
     Volt::route('/login', 'login')->name('login');
     Volt::route('/register', 'register');
 });
@@ -60,6 +64,8 @@ Route::middleware(['auth', 'research-head'])->prefix('head')->name('head.')->gro
     Route::get('/personnel-management', PersonnelManagement::class)->name('personnel');
     Route::get('/instructor-management', InstructorManagement::class)->name('instructor');
     Route::get('/role-management', RoleManagement::class)->name('role');
+    Route::get('/department-course-management', DepartmentCourseManagement::class)->name('dept');
+    Route::get('/department-course-management/{department}', CourseManagement::class)->name('dept.course');
 });
 
 //professor routes

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('department_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->string('code');
             $table->timestamps();
         });
     }

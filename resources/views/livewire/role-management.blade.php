@@ -6,6 +6,9 @@
     </x-slot:menu>
 
     <x-table :headers="$headers" :rows="$roles" show-empty-text with-pagination>
+        @scope('cell_id', $role)
+        {{$loop->iteration}}
+        @endscope
         @scope('actions', $role)
         <div class="flex gap-3">
             <x-button icon="o-pencil" @click="$wire.edit({{$role}})" spinner class="btn-sm btn-info" />
@@ -42,8 +45,7 @@
             <p class="mt-2">Are you sure you want to delete <b>{{$form->name}}</b> role?</p>
         </div>
         <x-slot:actions>
-            <x-button icon="o-trash" class="btn-error" label="Delete" spinner="destroy"
-                wire:click="destroy" />
+            <x-button icon="o-trash" class="btn-error" label="Delete" spinner="destroy" wire:click="destroy" />
         </x-slot:actions>
     </x-modal>
 </x-card>

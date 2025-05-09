@@ -12,10 +12,15 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        $csDept = Department::where('name', 'Computer Science')->first();
-        $mathDept = Department::where('name', 'Mathematics')->first();
-        $algoCourse = Course::where('name', 'Algorithms')->first();
-        $laCourse = Course::where('name', 'Linear Algebra')->first();
+        $csDept = Department::where('name', 'Computer Studies')->first();
+        $eduDept = Department::where('name', 'Education')->first();
+        $crimDept = Department::where('name', 'Criminal Justice')->first();
+        $accDept = Department::where('name', 'Accounting')->first();
+
+        $bsitCourse = Course::where('code', 'BSIT')->first();
+        $bsedCourse = Course::where('code', 'BSED')->first();
+        $bscrimCourse = Course::where('code', 'BSCrim')->first();
+        $bsaCourse = Course::where('code', 'BSA')->first();
 
         // Research Head
         User::create([
@@ -25,28 +30,49 @@ class UserSeeder extends Seeder
             'email' => 'martinez.john@ncst.edu.ph',
             'password' => Hash::make('martinez'),
             'department_id' => $csDept?->id,
+            'is_active' => true,
         ]);
 
         // Professors
-        User::create([
-            'first_name' => 'Robert',
-            'last_name' => 'Santos',
-            'role' => 'professor',
-            'email' => 'santos.robert@ncst.edu.ph',
-            'password' => Hash::make('santos'),
-            'department_id' => $csDept?->id,
-            'course_id' => $algoCourse?->id,
-        ]);
+        $professors = [
+            [
+                'first_name' => 'Robert',
+                'last_name' => 'Santos',
+                'department_id' => $csDept?->id,
+                'course_id' => $bsitCourse?->id,
+            ],
+            [
+                'first_name' => 'Maria',
+                'last_name' => 'Cruz',
+                'department_id' => $eduDept?->id,
+                'course_id' => $bsedCourse?->id,
+            ],
+            [
+                'first_name' => 'Ricardo',
+                'last_name' => 'Dela Cruz',
+                'department_id' => $crimDept?->id,
+                'course_id' => $bscrimCourse?->id,
+            ],
+            [
+                'first_name' => 'Elena',
+                'last_name' => 'Reyes',
+                'department_id' => $accDept?->id,
+                'course_id' => $bsaCourse?->id,
+            ],
+        ];
 
-        User::create([
-            'first_name' => 'Maria',
-            'last_name' => 'Cruz',
-            'role' => 'professor',
-            'email' => 'cruz.maria@ncst.edu.ph',
-            'password' => Hash::make('cruz'),
-            'department_id' => $mathDept?->id,
-            'course_id' => $laCourse?->id,
-        ]);
+        foreach ($professors as $professor) {
+            User::create([
+                'first_name' => $professor['first_name'],
+                'last_name' => $professor['last_name'],
+                'role' => 'professor',
+                'email' => strtolower($professor['last_name'] . '.' . $professor['first_name'] . '@ncst.edu.ph'),
+                'password' => Hash::make(strtolower($professor['last_name'])),
+                'department_id' => $professor['department_id'],
+                'course_id' => $professor['course_id'],
+                'is_active' => true,
+            ]);
+        }
 
         // Students
         $students = [
@@ -54,22 +80,29 @@ class UserSeeder extends Seeder
                 'first_name' => 'Anna',
                 'last_name' => 'Garcia',
                 'department_id' => $csDept?->id,
-                'course_id' => $algoCourse?->id,
+                'course_id' => $bsitCourse?->id,
                 'student_number' => '2023-00001',
             ],
             [
                 'first_name' => 'Miguel',
                 'last_name' => 'Reyes',
-                'department_id' => $mathDept?->id,
-                'course_id' => $laCourse?->id,
+                'department_id' => $eduDept?->id,
+                'course_id' => $bsedCourse?->id,
                 'student_number' => '2023-00002',
             ],
             [
                 'first_name' => 'Sofia',
                 'last_name' => 'Torres',
-                'department_id' => $csDept?->id,
-                'course_id' => $algoCourse?->id,
+                'department_id' => $crimDept?->id,
+                'course_id' => $bscrimCourse?->id,
                 'student_number' => '2023-00003',
+            ],
+            [
+                'first_name' => 'Marco',
+                'last_name' => 'Luna',
+                'department_id' => $accDept?->id,
+                'course_id' => $bsaCourse?->id,
+                'student_number' => '2023-00004',
             ],
         ];
 
@@ -83,6 +116,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make(strtolower($student['last_name'])),
                 'department_id' => $student['department_id'],
                 'course_id' => $student['course_id'],
+                'is_active' => true,
             ]);
         }
     }

@@ -2,28 +2,39 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Course;
 use App\Models\Department;
+use Illuminate\Database\Seeder;
 
 class CourseSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        $departments = Department::all()->keyBy('name');
-
         $courses = [
-            ['name' => 'Algorithms', 'department' => 'Computer Science'],
-            ['name' => 'Linear Algebra', 'department' => 'Mathematics'],
-            ['name' => 'Quantum Mechanics', 'department' => 'Physics'],
-            ['name' => 'Organic Chemistry', 'department' => 'Chemistry'],
+            'Computer Studies' => [
+                ['code' => 'BSIT', 'name' => 'Bachelor of Science in Information Technology'],
+                ['code' => 'BSCS', 'name' => 'Bachelor of Science in Computer Science'],
+            ],
+            'Education' => [
+                ['code' => 'BSED', 'name' => 'Bachelor of Secondary Education'],
+                ['code' => 'BEED', 'name' => 'Bachelor of Elementary Education'],
+            ],
+            'Criminal Justice' => [
+                ['code' => 'BSCrim', 'name' => 'Bachelor of Science in Criminology'],
+            ],
+            'Accounting' => [
+                ['code' => 'BSA', 'name' => 'Bachelor of Science in Accountancy'],
+            ],
         ];
 
-        foreach ($courses as $course) {
-            if (isset($departments[$course['department']])) {
+        foreach ($courses as $departmentName => $departmentCourses) {
+            $department = Department::where('name', $departmentName)->first();
+            
+            foreach ($departmentCourses as $course) {
                 Course::create([
+                    'department_id' => $department->id,
+                    'code' => $course['code'],
                     'name' => $course['name'],
-                    'department_id' => $departments[$course['department']]->id,
                 ]);
             }
         }

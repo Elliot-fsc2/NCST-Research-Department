@@ -19,7 +19,7 @@ class InstructorManagement extends Component
         dd($user);
         return false;
     }
-    public $sortBy = ['column' => 'first_name', 'direction' => 'asc'];
+    public $sortBy = ['column' => 'id', 'direction' => 'asc'];
     public $headers = [
         ['key' => 'id', 'label' => '#'],
         ['key' => 'first_name', 'label' => 'First Name'],

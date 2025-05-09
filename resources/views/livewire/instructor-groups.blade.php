@@ -75,29 +75,8 @@
     </x-modal>
 
     <x-modal title="Edit Members" wire:model="addMembersModal" subtitle="Setup your Group Members for {{$selectedGroup['title']}}">
-        <x-form wire:submit="updateMembers">
+        <x-form wire:submit="addMember">
             <div class="space-y-4">
-                <!-- Current Members -->
-                <div class="mb-4">
-                    <h4 class="font-medium mb-2">Current Members</h4>
-                    @foreach($groupMembers as $index => $member)
-                        <div class="flex items-center justify-between p-2 bg-gray-50 rounded mb-2">
-                            <span>{{ $member['student_name'] }}</span>
-                            <div class="flex gap-2">
-                                <x-button 
-                                    wire:click="toggleLeader({{$member['student_id']}})" 
-                                    :label="$member['is_leader'] ? 'Remove Leader' : 'Make Leader'"
-                                    class="btn-sm {{ $member['is_leader'] ? 'btn-warning' : 'btn-success' }}"
-                                />
-                                <x-button 
-                                    wire:click="removeMember({{$member['student_id']}})" 
-                                    icon="o-x-mark"
-                                    class="btn-sm btn-error"
-                                />
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
 
                 <!-- Add New Members -->
                 <x-choices-offline 

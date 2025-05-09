@@ -96,6 +96,7 @@
                         <x-menu-item title="Personnel Management" icon="o-user-group" link="/head/personnel-management"/>
                         <x-menu-item title="Instructor Management" icon="o-user-group" link="/head/instructor-management"/>
                         <x-menu-item title="Custom Role Management" icon="o-user-group" link="/head/role-management"/>
+                        <x-menu-item title="Department and Course Management" icon="o-user-group" link="/head/department-course-management"/>
                     </x-menu-sub>
 
                     <x-menu-separator />

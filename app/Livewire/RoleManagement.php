@@ -18,7 +18,6 @@ class RoleManagement extends Component
     public $search;
     public $deleteModal = false;
     public $addModal = false;
-    public $updateModal = false;
     public $headers = [
         ['key' => 'id', 'label' => 'ID'],
         ['key' => 'name', 'label' => 'Name'],

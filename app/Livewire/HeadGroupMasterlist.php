@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Group;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Carbon\Carbon;
@@ -61,7 +62,7 @@ class HeadGroupMasterlist extends Component
 
         $this->details = true;
     }
-    public function groups(): Collection
+    public function groups(): LengthAwarePaginator
     {
         return Group::query()
             ->with([
@@ -73,7 +74,7 @@ class HeadGroupMasterlist extends Component
             ])
             ->when($this->search, fn(Builder $q) => $q->where('title', 'like', "%$this->search%"))
             ->orderBy(...array_values($this->sortBy))
-            ->get();
+            ->paginate(10);
     }
     public function mount()
     {

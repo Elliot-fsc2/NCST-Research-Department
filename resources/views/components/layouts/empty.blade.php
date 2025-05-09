@@ -12,9 +12,14 @@
     <title>{{ isset($title) ? $title.' - '.config('app.name') : config('app.name') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen font-poppins bg-base-100">
+<body class="min-h-screen font-poppins bg-base-200">
     {{-- You could elaborate the layout here --}}
     {{-- The important part is to have a different layout from the main app layout --}}
-    {{ $slot }}
+
+    <x-main full-width>
+        <x-slot:content>
+            {{ $slot }}
+        </x-slot:content>
+    </x-main>
 </body>
 </html>

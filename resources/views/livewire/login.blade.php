@@ -70,7 +70,7 @@ class extends Component {
 <div class="md:w-96 mx-auto mt-15">
     
 
-    <x-card shadow separator class="bg-gray-200">
+    <x-card shadow separator>
         <div class="my-10">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img class="mx-auto h-20 w-auto" src="{{asset('images/ncst.png')}}" alt="NCST Logo">
@@ -85,7 +85,7 @@ class extends Component {
             <x-input placeholder="Password" wire:model="password" type="password" icon="o-key" />
      
             <x-slot:actions>
-                <x-button label="Create an account" class="btn-ghost" link="/register" />
+                {{-- <x-button label="Create an account" class="btn-ghost" link="/register" /> --}}
                 <x-button label="Login" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="login" />
             </x-slot:actions>
         </x-form>

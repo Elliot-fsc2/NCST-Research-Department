@@ -6,7 +6,7 @@
            <x-input placeholder="Search" inline wire:model.live="search" />
         </x-slot:menu>
         
-        <x-table :headers="$headers" :rows="$groups" :sort-by="$sortBy" @row-click="$wire.showDetails($event.detail)">
+        <x-table :headers="$headers" :rows="$groups" :sort-by="$sortBy" @row-click="$wire.showDetails($event.detail)" show-empty-text with-pagination>>
             @scope('cell_id', $group)
             {{ $loop->index + 1 }}
             @endscope

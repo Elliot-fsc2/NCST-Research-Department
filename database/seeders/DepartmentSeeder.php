@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Department;
+use Illuminate\Database\Seeder;
 
 class DepartmentSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $departments = [
-            ['name' => 'Computer Science'],
-            ['name' => 'Mathematics'],
-            ['name' => 'Physics'],
-            ['name' => 'Chemistry'],
+            ['name' => 'Computer Studies'],
+            ['name' => 'Education'],
+            ['name' => 'Criminal Justice'],
+            ['name' => 'Accounting'],
         ];
 
         foreach ($departments as $department) {
